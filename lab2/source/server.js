@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
     
     if(req.query.audioPlayer) {
       sentText += `<audio id=audioPlayer src=` + res.query.audioPlayer + `> </audio>`
+
+      sentText += `<button id="audioCancel" onclick="changeOnSrc("audioPlayer", "cancel.mp3")"> Cancel audio </button>`;
+
     }
 
     res.send(sentText);
