@@ -9,20 +9,20 @@ app.get('/', (req, res) => {
     if (req.query.videoPlayer) {
       toSend += `<video id=videoPlayer src=` + res.query.videoPlayer + `> </video>`
  
-      toSend += `<button id="videoCancel" onclick="changeOnSrc("videoPlayer", "cancel.mp4")"> Cancel video </button>`
+      toSend += `<button id="videoCancel" onclick="help("videoPlayer", "cancel.mp4")"> Cancel video </button>`
 
     }
     
     if (req.query.audioPlayer) {
       toSend += `<audio id=audioPlayer src=` + res.query.audioPlayer + `> </audio>`
  
-      toSend += `<button id="audioCancel" onclick="changeOnSrc("audioPlayer", "cancel.mp3")"> Cancel audio </button>`
+      toSend += `<button id="audioCancel" onclick="help("audioPlayer", "cancel.mp3")"> Cancel audio </button>`
 
       
     }
     
     var tag = `<script>
-      function changeOnSrc(id, onClickValue) {
+      function help(id, onClickValue) {
         element = Document.getElementById(id);
         element.src = onClickValue; 
       }
