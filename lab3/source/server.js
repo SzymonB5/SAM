@@ -53,8 +53,8 @@ app.get('/', (req, res) => {
 	if (req.query.videoFile) {
 		messageToSend += `<script>document.getElementById('videoAdd').addEventListener('click',
 		() => {
-    		let table = document.getElementById('playlist_table').insertRow(table.rows.length);
-            let row = table.insertRow(table.rows.length);
+    			let table = document.getElementById('playlist_table').insertRow(table.rows.length);
+		        let row = table.insertRow(table.rows.length);
 			let c1 = row.insertCell(0);
 			let c2 = row.insertCell(1);
 			let c3 = row.insertCell(2);
