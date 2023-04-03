@@ -34,20 +34,6 @@ app.get('/', (req, res) => {
   					  </tr>
 					</table>`
 
-	if (req.query.audioFile) {
-		messageToSend += `<script>document.getElementById("audioAdd").addEventListener('click',
-		() => {
-    			let table = document.getElementById('playlist_table');
-        	        let row = table.insertRow(table.rows.length);
-    			let c1 = row.insertCell(0);
-			let c2 = row.insertCell(1);
-	            	let c3 = row.insertCell(2);
-        	    	c1.innerHTML = table.rows.length + 1;
-        	    	c2.innerHTML = document.getElementById('audioPlayer').src;
-        	    	c3.innerText = 'Audio';
-		})</script>`
-	}
-
 	if (req.query.videoFile) {
 		messageToSend += `<script>document.getElementById('videoAdd').addEventListener('click',
 		() => {
@@ -61,7 +47,24 @@ app.get('/', (req, res) => {
 			c3.innerText = 'Video';
 		})</script>`
 	}
+	
+	if (req.query.audioFile) {
+		messageToSend += `<script>document.getElementById("audioAdd").addEventListener('click',
+		() => {
+    			let table = document.getElementById('playlist_table');
+        	        let row = table.insertRow(table.rows.length);
+    			let c1 = row.insertCell(0);
+			let c2 = row.insertCell(1);
+	            	let c3 = row.insertCell(2);
+        	    	c1.innerHTML = table.rows.length + 1;
+        	    	c2.innerHTML = document.getElementById('audioPlayer').src;
+        	    	c3.innerText = 'Audio';
+		})</script>`
+	}
+	
 
+	
+            
 
 
     res.send(messageToSend);
