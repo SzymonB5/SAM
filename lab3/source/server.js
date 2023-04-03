@@ -1,8 +1,6 @@
 const express = require('express')
 
-
 const app = express()
-
 
 app.get('/', (req, res) => {
 
@@ -65,9 +63,6 @@ app.get('/', (req, res) => {
 
     	res.send(messageToSend);
 })
-
-
-
 
 app.get('/', (req, res) => {
 	res.send("Hello World!");
