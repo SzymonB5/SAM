@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 			let c1 = row.insertCell(0);
 			let c2 = row.insertCell(1);
 			let c3 = row.insertCell(2);
-			c1.innerHTML = table.rows.length + 1
+			c1.innerHTML = table.rows.length - 1
 			c2.innerHTML = document.getElementById('videoPlayer').src
 			c3.innerText = 'Video';
 		})</script>`
@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
     			let c1 = row.insertCell(0);
 			let c2 = row.insertCell(1);
 	            	let c3 = row.insertCell(2);
-        	    	c1.innerHTML = table.rows.length + 1;
+        	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('audioPlayer').src;
         	    	c3.innerText = 'Audio';
 		})</script>`
