@@ -2,11 +2,11 @@ const express = require('express')
 
 const app = express()
 
+
 app.get('/', (req, res) => {
 
 	let messageToSend = '';
-	
-	
+		
 	if (req.query.videoFile) {
 		messageToSend += `</br> <video id = "videoPlayer" src = ${req.query.videoFile}></video>`;
 		messageToSend += `<button type="button" id = "videoCancel">cancel video</button>`;
