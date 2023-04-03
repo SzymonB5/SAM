@@ -4,27 +4,32 @@ const app = express()
 
 app.get('/', (req, res) => {
 
-	let sentMessage = '';
+	let messageToSend = '';
 	
 	if (req.query.videoFile) {
-		sentMessage += `</br> <video id = "videoPlayer" src = ${req.query.videoFile}></video>`;
-		sentMessage += `<button type="button" id = "videoCancel">Click Me!</button>`;
-		sentMessage += `<script>document.getElementById("videoCancel").addEventListener('click', () => document.getElementById("videoPlayer").src = "cancel.mp4")</script>`
+		messageToSend += `</br> <video id = "videoPlayer" src = ${req.query.videoFile}></video>`;
+		messageToSend += `<button type="button" id = "videoCancel">Click Me!</button>`;
+		messageToSend += `<script>document.getElementById("videoCancel").addEventListener('click', () => document.getElementById("videoPlayer").src = "cancel.mp4")</script>`
 	}
 	
 	if (req.query.audioFile) {
-		sentMessage += `<audio id = "audioPlayer" src = ${req.query.audioFile}></audio>`;
-		sentMessage += `<button type="button" id = "audioCancel">Click Me!</button>`;
-		sentMessage += `<script>document.getElementById("audioCancel").addEventListener('click', () => document.getElementById("audioPlayer").src = "cancel.mp4")</script>`
+		messageToSend += `<audio id = "audioPlayer" src = ${req.query.audioFile}></audio>`;
+		messageToSend += `<button type="button" id = "audioCancel">Click Me!</button>`;
+		messageToSend += `<script>document.getElementById("audioCancel").addEventListener('click', () => document.getElementById("audioPlayer").src = "cancel.mp4")</script>`
 	}
 	
 	if (req.query.imgFile) {
-		sentMessage += `<img src=${req.query.imgFile} id = "posterImage">`;
+		messageToSend += `<img src=${req.query.imgFile} id = "posterImage">`;
 	}
+	
+	messageToSend += `<table id = 'playlist_table'> 
+					  <tr> <th>No.</th>
+    					<th>URL</th>
+    				  	<th>Type</th> </tr>`
+	
 
 
-
-    res.send(sentMessage);
+    res.send(messageToSend);
 })
 
 
