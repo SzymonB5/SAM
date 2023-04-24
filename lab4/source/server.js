@@ -115,8 +115,7 @@ app.get('/', (req, res) => {
 	            })
 		})
 	
-	</script>
-	`
+	</script>`
             
 
 
