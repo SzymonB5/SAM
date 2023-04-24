@@ -43,9 +43,12 @@ app.get('/', (req, res) => {
 			let c1 = row.insertCell(0);
 			let c2 = row.insertCell(1);
 			let c3 = row.insertCell(2);
+			let c4 = row.insertCell(3);
+			
 			c1.innerHTML = table.rows.length - 1
 			c2.innerHTML = document.getElementById('videoPlayer').src
 			c3.innerText = 'Video';
+			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>';
 		})</script>`
 	}
 	
@@ -57,12 +60,30 @@ app.get('/', (req, res) => {
     			let c1 = row.insertCell(0);
 			let c2 = row.insertCell(1);
 	            	let c3 = row.insertCell(2);
+			let c4 = row.insertCell(3);
+			
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('audioPlayer').src;
-        	    	c3.innerText = 'Audio';
+        	    	c3.innerText = 'Audio';  	
+        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>';
 		})</script>`
 	}
-	
+	if (req.query.imgFile) {
+		messageToSend += `<script>document.getElementById("imgAdd").addEventListener('click',
+		() => {
+    			let table = document.getElementById('playlist_table');
+                	let row = table.insertRow(table.rows.length);
+    			let c1 = row.insertCell(0);
+			let c2 = row.insertCell(1);
+	            	let c3 = row.insertCell(2);
+        	        let c4 = row.insertCell(3);
+        	        
+        	    	c1.innerHTML = table.rows.length - 1;
+        	    	c2.innerHTML = document.getElementById('posterImage').src;
+        	    	c3.innerText = 'Image';
+        	        c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>';
+		})</script>`
+	}
 
 	
             
