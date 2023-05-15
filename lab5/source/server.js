@@ -53,21 +53,42 @@ app.get('/', (req, res) => {
 
     messageToSend += `
 	<script>
-	let addMoveRowUpToUpButtons = () => {
-        	let moveUpButtons = document.querySelectorAll('.moveRowUpButton')
-			moveUpButtons.forEach((button) => {
+	let addMoveRowDownToDownButtons = () => {
+        		const moveDownButtons = document.querySelectorAll('.moveRowDownButton')
+				moveDownButtons.forEach( (button) => {
             
             button.addEventListener('click', () => {
-				let prev = row.previousElementSibling;
                 const row = button.parentElement.parentElement;
-				if (row.previousElementSibling) {
-					row.parentNode.insertBefore(row, prev)
+				let prevRow = row.nextElementSibling;
+				let firstRow = document.querySelector('tr');
+				if (prevRow.rowIndex < document.querySelectorAll('tr').length) {
+					row.parentNode.insertAfter(row, prevRow)
 				}
-				else {
-					row.parentNode.appendChild(row);
+				else if (firstRow) {
+					row.parentNode.insertAfter(row, firstRow);
 				}
             })
 		})
+	}
+	</script>
+	`
+
+    messageToSend += `
+	<script>
+	let addMoveRowUpToUpButtons = () => {
+        		const moveUpButtons = document.querySelectorAll('.moveRowUpButton')
+				moveUpButtons.forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const row = button.parentElement.parentElement;
+				        let prevRow = row.previousElementSibling;
+				        if (prevRow) {
+					        row.parentNode.insertBefore(row, prevRow)
+				        }
+				        else {
+					        row.parentNode.appendChild(row);
+				        }
+                    })
+		        })
 	}
 	</script>
 	`
@@ -85,10 +106,9 @@ app.get('/', (req, res) => {
 			c1.innerHTML = table.rows.length - 1
 			c2.innerHTML = document.getElementById('videoPlayer').src
 			c3.innerText = 'Video';
-			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button><button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
-            
+			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
 			addDeleteToDeleteButtons();
-			addMoveRowUpToUpButtons();
+            addMoveRowUpToUpButtons();
 		})</script>`
     }
 
@@ -105,8 +125,8 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('audioPlayer').src;
         	    	c3.innerText = 'Audio';  	
-        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button><button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
-                    addDeleteToDeleteButtons();
+        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+			        addDeleteToDeleteButtons();
                     addMoveRowUpToUpButtons();
 		})</script>`
     }
@@ -123,9 +143,8 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('posterImage').src;
         	    	c3.innerText = 'Image';
-                    c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button><button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
-
-        	        addDeleteToDeleteButtons();
+        	        c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+			        addDeleteToDeleteButtons();
                     addMoveRowUpToUpButtons();
 		})</script>`
     }
