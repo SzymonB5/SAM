@@ -100,7 +100,9 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('posterImage').src;
         	    	c3.innerText = 'Image';
-        	        c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>';
+        	        c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>' +
+        	         ' <button type="button" class="moveUpButton">Move Up</button>';
+                    
         	        addDeleteToDeleteButtons();
 		})</script>`
     }
@@ -116,6 +118,21 @@ app.get('/', (req, res) => {
 		})
 	
 	</script>`
+
+    messageToSend += `
+        <script>
+        const moveUpButtons = document.querySelectorAll('.moveUpButton');
+        moveUpButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+        const row = button.parentElement.parentElement;
+        const previousRow = row.previousElementSibling;
+        if (previousRow) {
+            row.parentNode.insertBefore(row, previousRow);
+        }
+    });
+});
+    
+   </script> `
 
 
 
