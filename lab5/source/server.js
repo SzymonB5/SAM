@@ -51,6 +51,26 @@ app.get('/', (req, res) => {
 	</script>
 	`
 
+    messageToSend += `
+	<script>
+	let addMoveRowUpToUpButtons = () => {
+        	let moveUpButtons = document.querySelectorAll('.moveRowUpButton')
+			moveUpButtons.forEach((button) => {
+            
+            button.addEventListener('click', () => {
+				let prev = row.previousElementSibling;
+                const row = button.parentElement.parentElement;
+				if (row.previousElementSibling) {
+					row.parentNode.insertBefore(row, prev)
+				}
+				else {
+					row.parentNode.appendChild(row);
+				}
+            })
+		})
+	}
+	</script>
+	`
 
     if (req.query.videoFile) {
         messageToSend += `<script>document.getElementById('videoAdd').addEventListener('click',
@@ -65,8 +85,10 @@ app.get('/', (req, res) => {
 			c1.innerHTML = table.rows.length - 1
 			c2.innerHTML = document.getElementById('videoPlayer').src
 			c3.innerText = 'Video';
-			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>';
+			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button><button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+            
 			addDeleteToDeleteButtons();
+			addMoveRowUpToUpButtons();
 		})</script>`
     }
 
@@ -83,8 +105,9 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('audioPlayer').src;
         	    	c3.innerText = 'Audio';  	
-        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>';
-        	    	addDeleteToDeleteButtons();
+        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button><button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+                    addDeleteToDeleteButtons();
+                    addMoveRowUpToUpButtons();
 		})</script>`
     }
     if (req.query.imgFile) {
@@ -100,10 +123,10 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('posterImage').src;
         	    	c3.innerText = 'Image';
-        	        c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button>' +
-        	         ' <button type="button" class="moveUpButton">Move Up</button>';
-                    
+                    c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button><button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+
         	        addDeleteToDeleteButtons();
+                    addMoveRowUpToUpButtons();
 		})</script>`
     }
 
@@ -118,21 +141,6 @@ app.get('/', (req, res) => {
 		})
 	
 	</script>`
-
-    messageToSend += `
-        <script>
-        const moveUpButtons = document.querySelectorAll('.moveUpButton');
-        moveUpButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-        const row = button.parentElement.parentElement;
-        const previousRow = row.previousElementSibling;
-        if (previousRow) {
-            row.parentNode.insertBefore(row, previousRow);
-        }
-    });
-});
-    
-   </script> `
 
 
 
