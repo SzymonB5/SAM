@@ -53,6 +53,27 @@ app.get('/', (req, res) => {
 
     messageToSend += `
 	<script>
+	let addMoveRowUpToUpButton = (button) => {
+            const row = button.parentElement.parentElement;
+            let prevRow = row.previousElementSibling;
+            if (prevRow.rowIndex > 0) {
+                row.parentNode.insertBefore(row, prevRow);
+            }
+            else {
+                row.parentNode.appendChild(row);
+            }
+    }
+	</script>
+	`
+    messageToSend += `
+	<script>
+		let insertAfter = (newNode, referenceNode) => {
+			referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+		}
+	</script>`
+
+    messageToSend += `
+	<script>
 	let addMoveRowDownToDownButtons = () => {
         		const moveDownButtons = document.querySelectorAll('.moveRowDownButton')
 				moveDownButtons.forEach( (button) => {
@@ -62,33 +83,13 @@ app.get('/', (req, res) => {
 				let prevRow = row.nextElementSibling;
 				let firstRow = document.querySelector('tr');
 				if (prevRow.rowIndex < document.querySelectorAll('tr').length) {
-					row.parentNode.insertAfter(row, prevRow)
+					insertAfter(row, prevRow);
 				}
-				else if (firstRow) {
-					row.parentNode.insertAfter(row, firstRow);
+				else if (firstRow) {    
+					insertAfter(row, firstRow);
 				}
             })
 		})
-	}
-	</script>
-	`
-
-    messageToSend += `
-	<script>
-	let addMoveRowUpToUpButtons = () => {
-        		const moveUpButtons = document.querySelectorAll('.moveRowUpButton')
-				moveUpButtons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        const row = button.parentElement.parentElement;
-				        let prevRow = row.previousElementSibling;
-				        if (prevRow) {
-					        row.parentNode.insertBefore(row, prevRow)
-				        }
-				        else {
-					        row.parentNode.appendChild(row);
-				        }
-                    })
-		        })
 	}
 	</script>
 	`
@@ -103,12 +104,11 @@ app.get('/', (req, res) => {
 			let c3 = row.insertCell(2);
 			let c4 = row.insertCell(3);
 			
-			c1.innerHTML = table.rows.length - 1
-			c2.innerHTML = document.getElementById('videoPlayer').src
+			c1.innerHTML = table.rows.length - 1;
+			c2.innerHTML = document.getElementById('videoPlayer').src;
 			c3.innerText = 'Video';
-			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+			c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton" onclick="addMoveRowUpToUpButton(this)">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
 			addDeleteToDeleteButtons();
-            addMoveRowUpToUpButtons();
 		})</script>`
     }
 
@@ -125,9 +125,9 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('audioPlayer').src;
         	    	c3.innerText = 'Audio';  	
-        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton" onclick="addMoveRowUpToUpButton(this)">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+
 			        addDeleteToDeleteButtons();
-                    addMoveRowUpToUpButtons();
 		})</script>`
     }
     if (req.query.imgFile) {
@@ -143,9 +143,8 @@ app.get('/', (req, res) => {
         	    	c1.innerHTML = table.rows.length - 1;
         	    	c2.innerHTML = document.getElementById('posterImage').src;
         	    	c3.innerText = 'Image';
-        	        c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
+        	    	c4.innerHTML = '<button type="button" class="removeRowButton">Delete</button> <button type="button" class="moveRowUpButton" onclick="addMoveRowUpToUpButton(this)">Up</button> <button type="button" class="moveRowDownButton">Down</button>';
 			        addDeleteToDeleteButtons();
-                    addMoveRowUpToUpButtons();
 		})</script>`
     }
 
