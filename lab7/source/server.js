@@ -33,9 +33,7 @@ app.get('/', (req, res) => {
         messageToSend  += `<button type="button" id = "audioCancel">cancel audio</button>`;
         messageToSend  += `<button type="button" id = "audioAdd">Add audio</button>`;
         messageToSend  += `<script>document.getElementById("audioCancel").addEventListener('click', () => document.getElementById("audioPlayer").src = "cancel.mp3")</script>`
-
     }
-
 
     messageToSend += `<table id = 'playlist_table'> 
 					  <tr>
