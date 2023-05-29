@@ -6,7 +6,6 @@ app.get('/', (req, res) => {
 
     let messageToSend  = '';
 
-
     if (req.query.imgFile) {
         messageToSend += `<img src=${req.query.imgFile} id = "posterImage">`;
         messageToSend += `<button type="button" id = "imgAdd">Add img</button>`;
