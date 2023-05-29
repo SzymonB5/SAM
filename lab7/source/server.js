@@ -4,8 +4,18 @@ const app = express()
 
 app.get('/', (req, res) => {
 
-
     let messageToSend  = '';
+
+
+    if (req.query.videoFile) {
+        messageToSend += `<button type="button" id = "videoPlay">Play Video</button>`;
+        messageToSend += `<button type="button" id = "videoPause">Pause Video</button>`;
+    }
+
+    if (req.query.audioFile) {
+        messageToSend += `<button type="button" id = "audioPlay">Play Audio</button>`;
+        messageToSend += `<button type="button" id = "audioPause">Pause Audio</button>`;
+    }
 
     if (req.query.imgFile) {
         messageToSend += `<img src=${req.query.imgFile} id = "posterImage">`;
@@ -27,15 +37,6 @@ app.get('/', (req, res) => {
 
     }
 
-    if (req.query.videoFile) {
-        messageToSend += `<button type="button" id = "videoPlay">Play Video</button>`;
-        messageToSend += `<button type="button" id = "videoPause">Pause Video</button>`;
-    }
-
-    if (req.query.audioFile) {
-        messageToSend += `<button type="button" id = "audioPlay">Play Audio</button>`;
-        messageToSend += `<button type="button" id = "audioPause">Pause Audio</button>`;
-    }
 
     messageToSend += `<table id = 'playlist_table'> 
 					  <tr>
