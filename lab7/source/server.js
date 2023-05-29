@@ -6,7 +6,6 @@ app.get('/', (req, res) => {
 
     let messageToSend  = '';
 
-
     if (req.query.videoFile) {
         messageToSend += `<button type="button" id = "videoPlay">Play Video</button>`;
         messageToSend += `<button type="button" id = "videoPause">Pause Video</button>`;
